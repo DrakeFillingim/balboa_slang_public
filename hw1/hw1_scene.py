@@ -186,18 +186,65 @@ def compose_transformation(transforms):
     """
         Given a list of transformations, compose them into a matrix.
     """
-
     F = np.eye(3, dtype=np.float32)
 
     for transform in transforms:
-        pass
-        # TODO: your code here
-
+        for key, value in transform.items():
+            if (key == "scale"):
+                G = np.array([[value[0], 0, 0],
+                              [0, value[1], 0],
+                              [0, 0, 1]])
+                F = G @ F
+            if (key == "shear_x"):
+                G = np.array([[1, value[0], 0],
+                              [0, 1, 0],
+                              [0, 0, 1]])
+                F = G @ F
+            if (key == "shear_y"):
+                G = np.array([[1, 0, 0],
+                              [value[0], 1, 0],
+                              [0, 0, 1]])
+                F = G @ F
+            if (key == "rotate"):
+                rad = math.radians(value[0])
+                G = np.array([[math.cos(rad), -math.sin(rad), 0],
+                              [math.sin(rad), math.cos(rad), 0],
+                              [0, 0, 1]])
+                F = G @ F
+            if (key == "translate"):
+                G = np.array([[1, 0, value[0]],
+                              [0, 1, value[1]],
+                              [0, 0, 1]])
+                F = G @ F
     return F
 
 def interpolate_transformation(transform_keyframes, t):
-    # TODO: your code here
+    #print(transform_keyframes)
+    for i in range(len(transform_keyframes)):
+        form0 = transform_keyframes[i]
+        if (t == form0['time']):
+            return form0['transform']
+        if (form0['time'] < t and transform_keyframes[i + 1]['time'] > t):
+            r = []
+            form1 = transform_keyframes[i + 1]
+            t0 = form0['time']
+            t1 = form1['time']
+            w = (t - t0) / (t1 - t0)
+            for j in range(len(form0['transform'])):
+                t0 = form0['transform'][j]
+                t1 = form1['transform'][j]
+                d = {}
+                key = list(t0.keys())[0]
+                if (key == "scale" or key == "translate"):
+                    d[key] = [lerp(t0[key][0], t1[key][0], w), 
+                              lerp(t0[key][1], t1[key][1], w)]
+                if (key == "shear_x" or key == "shear_y" or key == "rotate"):
+                    d[key] = [lerp(t0[key][0], t1[key][0], w)]
 
+                r.append(d)
+            #print("r", r)
+            return r
+    
     # Should never happen?
     assert False
 
@@ -235,3 +282,6 @@ def upload_scene(scene, module, slang_device, t=0.0):
         'quadratic_beziers': buffer.create_structured_buffer(slang_device, module.QuadraticBezier, scene.quadratic_beziers),
         'points': buffer.structured_buffer_from_numpy(slang_device, scene.points),
     }
+
+def lerp(x0, x1, w):
+    return (1 - w) * x0 + w * x1

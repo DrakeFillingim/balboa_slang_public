@@ -7,6 +7,8 @@ import image
 import functools
 from . import hw1_scene
 
+#import matplotlib.pyplot as plt
+
 def make_render_callback(kernel):
     def render(command_encoder, vars, image):
         kernel.dispatch(
@@ -29,6 +31,9 @@ def hw1_1(args):
     if args.output == None:
         app = window.App(slang_device, img)
         app.run(vars, make_render_callback(compute_shader.kernel))
+        img_np = img.to_numpy()
+        #plt.imshow(img_np)
+        #plt.show()
     else:
         compute_shader.kernel.dispatch(
             thread_count=[img.width, img.height, 1],

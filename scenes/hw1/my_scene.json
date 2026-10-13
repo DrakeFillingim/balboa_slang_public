@@ -1,0 +1,44 @@
+{
+    "resolution": [640, 640],
+    "background": [
+        0.4, 0.6, 0.4
+    ],
+    "objects": [
+        {
+            "type" : "circle",
+            "center" : [250, 500],
+            "radius" : 25,
+            "fill_rgba" : [0, 0, 0, 1],
+            "stroke_rgba" : [1, 1, 1, 1],
+            "stroke_width" : 15
+        },
+        {
+            "type" : "circle",
+            "fill_rgba" : [0.6, 0.6, 0.6, 1],
+            "stroke_rgba" : [0,0,0,1],
+            "stroke_width" : 0.02,
+            "transform" : [
+                {"scale" : [75, 75]},
+                {"translate" : [250, 500]}
+            ]
+        },
+        {
+            "type" : "triangle",
+            "p0" : [90, 495],
+            "p1" : [190, 535],
+            "p2" : [190, 455],
+            "fill_rgba" : [0.9, 0.6, 0, 1]
+        },
+        {
+            "type" : "circle",
+            "fill_rgba" : [0.6, 0.6, 0.6, 1],
+            "stroke_rgba" : [0,0,0,1],
+            "stroke_width" : 0.01,
+            "transform" : [
+                {"scale" : [100, 200]},
+                {"rotate" : [35]},
+                {"translate" : [380, 320]}
+            ]
+        }
+    ]
+}

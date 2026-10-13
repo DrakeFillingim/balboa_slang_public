@@ -11,6 +11,11 @@ void compute_main(uint2 tid : SV_DispatchThreadID,
         return;
     }
 
-    image[tid] = float4(1.0);
+    uint2 outPos = uint2(tid.x, height - 1 - tid.y);
+
+    image[outPos] = float4(1, 1, 1, 1);
     // TODO: your code here
+
+    float l = length(center - (tid + float2(0.5, 0.5)));
+    if (l < radius) image[outPos] = float4(color, 1);
 }

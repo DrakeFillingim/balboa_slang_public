@@ -1,0 +1,300 @@
+{
+    "resolution": [600, 450],
+    "duration": 2.0,
+    "background": [0.5, 0.7, 0.8],
+    "objects": [
+        
+
+        {
+            "type": "circle", 
+            "center": [300, 225],
+            "radius": 75,
+            "fill_rgba": [0.96, 0.7, 0.2, 1.0],
+            "stroke_rgba": [0.6, 0.3, 0.1, 1.0],
+            "stroke_width": 2
+        },
+        {
+            "type": "circle", 
+            "center": [300, 225],
+            "radius": 75,
+            "fill_rgba": [0.1, 0.1, 0.2, 1.0],
+            "stroke_rgba": [0.6, 0.3, 0.1, 1.0],
+            "stroke_width": 2
+        },
+        {
+            "type": "circle", 
+            "center": [85, 225],
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [0]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [-2]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [2]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [0]}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "circle", 
+            "center": [215, 225],
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [0]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [2]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [-2]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [2, 1]},
+                        {"rotate": [0]}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "circle", 
+            "center": [300, 175], 
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [0]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [2]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [-2]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [0]}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "circle", 
+            "center": [300, 50], 
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [0]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [-2]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [2]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [0]}
+                    ]
+                }
+            ]
+        },
+{
+            "type": "circle", 
+            "center": [370, 40], 
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [45]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [43]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [47]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [45]}
+                    ]
+                }
+            ]
+        },
+        
+        {
+            "type": "circle", 
+            "center": [400, -150], 
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [45]},
+                        {"translate": [-100, 70]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [43]},
+                        {"translate": [-100, 70]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [47]},
+                        {"translate": [-100, 70]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [45]},
+                        {"translate": [-100, 70]}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "circle", 
+            "center": [400, -150], 
+            "radius": 50,
+            "fill_rgba": [1, 1, 1, 1.0],
+            "stroke_rgba": [0.5, 0.5, 0.5, 1.0],
+            "stroke_width": 2,
+            "transform_keyframes": [
+                {
+                    "time": 0.0,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [135]},
+                        {"translate": [475, -175]}
+                    ]
+                },
+                {
+                    "time": 0.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [137]},
+                        {"translate": [475, -175]}
+                    ]
+                },
+                {
+                    "time": 1.5,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [133]},
+                        {"translate": [475, -175]}
+                    ]
+                },
+                {
+                    "time": 2,
+                    "transform": [
+                        {"scale": [1, 2]},
+                        {"rotate": [135]},
+                        {"translate": [475, -175]}
+                    ]
+                }
+            ]
+        }
+    ]
+}
