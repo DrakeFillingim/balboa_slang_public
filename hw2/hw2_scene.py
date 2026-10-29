@@ -187,7 +187,52 @@ def compose_transformations(transformations):
     F = np.eye(4, dtype=np.float32)
 
     for transform in transformations:
-        pass
+        for key, value in transform.items():
+            if (key == "scale"):
+                G = np.array([[value[0], 0, 0, 0],
+                              [0, value[1], 0, 0],
+                              [0, 0, value[2], 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "translate"):
+                G = np.array([[1, 0, 0, value[0]],
+                              [0, 1, 0, value[1]],
+                              [0, 0, 1, value[2]],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_x"):
+                rad = math.radians(value[0])
+                G = np.array([[1, 0, 0, 0],
+                              [0, math.cos(rad), -math.sin(rad), 0],
+                              [0, math.sin(rad), math.cos(rad), 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_y"):
+                rad = math.radians(value[0])
+                G = np.array([[math.cos(rad), 0, math.sin(rad), 0],
+                              [0, 1, 0, 0],
+                              [-math.sin(rad), 0, math.cos(rad), 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_z"):
+                rad = math.radians(value[0])
+                G = np.array([[math.cos(rad), -math.sin(rad), 0, 0],
+                              [math.sin(rad), math.cos(rad), 0, 0],
+                              [0, 0, 1, 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "lookat"):
+                p = value['position']
+                t = value['target']
+                u = value['up']
+                d = normalize(np.subtract(t, p))
+                r = normalize(np.cross(d, u))
+                up = np.cross(r, d)
+                G = np.array([[r[0], up[0], -d[0], p[0]],
+                              [r[1], up[1], -d[1], p[1]],
+                              [r[2], up[2], -d[2], p[2]],
+                              [0, 0, 0, 1]])
+                F = G @ F
         # HW 2.3 TODO: your code here
 
     return F
@@ -241,3 +286,6 @@ def parse_scene(filename : str) -> Scene:
                 light_color = light['light_color']
 
     return Scene(camera, background, meshes, duration, light_dir, light_color)
+
+def normalize(v):
+    return v / np.linalg.norm(v)

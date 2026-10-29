@@ -11,11 +11,15 @@ struct VertexOutput {
 VertexOutput vertex_main(uint vid : SV_VertexID) {
     VertexOutput output;
     // HW 2.6: your code here
+    float4 a = float4(vertices[vid], 1);
+    float4 b = mul(MVP, a);
+    output.position = b;
+    output.color = vertex_colors[vid];
     return output;
 }
 
 [shader("fragment")]
 float4 fragment_main(VertexOutput input) : SV_Target {
     // HW 2.6: your code here
-    return float4(1.0);
+    return float4(input.color, 1);
 }
