@@ -43,17 +43,100 @@ def compose_transformations(transformations):
     """
         Given a list of transformations, compose them into a matrix.
     """
-    # HW 3.4: copy paste your HW2.3 code here
-
     F = np.eye(4, dtype=np.float32)
+
+    for transform in transformations:
+        for key, value in transform.items():
+            if (key == "scale"):
+                G = np.array([[value[0], 0, 0, 0],
+                              [0, value[1], 0, 0],
+                              [0, 0, value[2], 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "translate"):
+                G = np.array([[1, 0, 0, value[0]],
+                              [0, 1, 0, value[1]],
+                              [0, 0, 1, value[2]],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_x"):
+                rad = math.radians(value[0])
+                G = np.array([[1, 0, 0, 0],
+                              [0, math.cos(rad), -math.sin(rad), 0],
+                              [0, math.sin(rad), math.cos(rad), 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_y"):
+                rad = math.radians(value[0])
+                G = np.array([[math.cos(rad), 0, math.sin(rad), 0],
+                              [0, 1, 0, 0],
+                              [-math.sin(rad), 0, math.cos(rad), 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "rotate_z"):
+                rad = math.radians(value[0])
+                G = np.array([[math.cos(rad), -math.sin(rad), 0, 0],
+                              [math.sin(rad), math.cos(rad), 0, 0],
+                              [0, 0, 1, 0],
+                              [0, 0, 0, 1]])
+                F = G @ F
+            if (key == "lookat"):
+                p = value['position']
+                t = value['target']
+                u = value['up']
+                d = normalize(np.subtract(t, p))
+                r = normalize(np.cross(d, u))
+                up = np.cross(r, d)
+                G = np.array([[r[0], up[0], -d[0], p[0]],
+                              [r[1], up[1], -d[1], p[1]],
+                              [r[2], up[2], -d[2], p[2]],
+                              [0, 0, 0, 1]])
+                F = G @ F
+
     return F
 
 def interpolate_transformation(transform_keyframes, t):
     # HW 3.4: copy your HW2.4 code here.
 
-    # create a new transform from the two keyframes
     interp_transforms = []
-    return interp_transforms
+    for i in range(len(transform_keyframes)):
+        f0 = transform_keyframes[i]
+        if (t == f0['time']):
+            return f0['transform']
+        if (f0['time'] < t and transform_keyframes[i + 1]['time'] > t):
+            f1 = transform_keyframes[i + 1]
+            t0 = f0['time']
+            t1 = f1['time']
+            w = (t - t0) / (t1 - t0)
+            for j in range(len(f0['transform'])):
+                j0 = f0['transform'][j]
+                j1 = f1['transform'][j]
+                d = {}
+                key = list(j0.keys())[0]
+                if (key == "scale" or key == "translate"):
+                    d[key] = [lerp(j0[key][0], j1[key][0], w),
+                                lerp(j0[key][1], j1[key][1], w),
+                                lerp(j0[key][2], j1[key][2], w)]
+                elif (key == "lookat"):
+                    n = {
+                        'position' : 
+                        [lerp(j0[key]['position'][0], j1[key]['position'][0], w),
+                            lerp(j0[key]['position'][1], j1[key]['position'][1], w),
+                            lerp(j0[key]['position'][2], j1[key]['position'][2], w)],
+                        'target' : 
+                        [lerp(j0[key]['target'][0], j1[key]['target'][0], w),
+                            lerp(j0[key]['target'][1], j1[key]['target'][1], w),
+                            lerp(j0[key]['target'][2], j1[key]['target'][2], w)],
+                        'up':
+                        [lerp(j0[key]['up'][0], j1[key]['up'][0], w),
+                            lerp(j0[key]['up'][1], j1[key]['up'][1], w),
+                            lerp(j0[key]['up'][2], j1[key]['up'][2], w)]
+                    }
+                    d[key] = n
+                else:
+                    d[key] = [lerp(j0[key][0], j1[key][0], w)]
+                interp_transforms.append(d)
+            return interp_transforms
 
 def get_transformation(obj, t):
     transforms = obj.get('transform', [])
@@ -240,3 +323,9 @@ def upload_scene(filename, module, slang_device, use_bvh = False):
     }
 
     return bindings, scene, shapes
+
+def normalize(v):
+    return v / np.linalg.norm(v)
+
+def lerp(x0, x1, w):
+    return (1 - w) * x0 + w * x1
